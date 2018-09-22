@@ -1,2 +1,2 @@
 global gcpq
-gcpq = 'Tell about yourself'
+gcpq = 'end'

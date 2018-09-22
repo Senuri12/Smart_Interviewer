@@ -6,6 +6,8 @@ import glob
 
 def question(a,b):
     print(a)
+    print(b)
+    print("vkum number")
 
 
     if isinstance(a, str):
@@ -33,9 +35,9 @@ def question(a,b):
 
             new_file.close()
 
-            filelist = glob.glob("Audio/answer_creation_purposes/*.wav")
-            for file in filelist:
-                os.remove(file)
+            # filelist = glob.glob("Audio/*.wav")
+            # for file in filelist:
+            #     os.remove(file)
 
 
 

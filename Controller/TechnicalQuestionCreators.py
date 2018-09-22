@@ -2,6 +2,7 @@
 import sys
 
 import nltk
+import os,glob
 from nltk.corpus import state_union
 from nltk.tokenize import PunktSentenceTokenizer
 from Controller import vik_test_codes
@@ -129,6 +130,12 @@ def gen_Question(keywords,questionno,nesornot):
 
     voice_record = AudioRecorder.audio_recorder(questionno)
     answer_validity = SpeachToText.validation(keywords, "technical", nesornot, "question" + str(questionno))[0]
+
+    # if questionno == "20" or questionno == 20:
+    #
+    #     filelist = glob.glob("Audio/*.wav")
+    #     for file in filelist:
+    #         os.remove(file)
 
 
 
