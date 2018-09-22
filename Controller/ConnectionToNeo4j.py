@@ -186,15 +186,15 @@ def sessionMarksStoring(Userid,Session,question,marks):
 
 
 
-def createQtable1(langName):
-    exist = "MATCH (n:language) where n.Name='" + langName + "' return n.qtable"
+def createQtable1(languageName):
+    exist = "MATCH (n:language) where n.Name='" + languageName + "' return n.qtable"
     qtableValue = graph.run(exist).evaluate()
     return qtableValue
 
 
 # this is to send and update values
-def sendQtable(langName,qTableCreated):
-    query = "Match (n:language) where n.Name='" + langName + "' SET n.qtable='" + qTableCreated + "'  RETURN n.qtable"
+def sendQtable(languageName,qTableCreated):
+    query = "Match (n:language) where n.Name='" + languageName + "' SET n.qtable='" + qTableCreated + "'  RETURN n.qtable"
     qtableValue1 = graph.run(query).evaluate()
     return qtableValue1
 
@@ -204,6 +204,19 @@ def edit_username(R):
     person['qtable'] = R
     person.push()
 
+
+#send the node list updated existing category-asked 1 remove krarapu 1
+def sendExistingDifficultyList(userid,languageName,difficultyLevel,str_getDiffList3):
+    exist = "MATCH(n: user_difficulty{uid: '" + userid + "'}) - [r: level]->(b:difficulty{technology: '" + languageName + "'}) SET b." + difficultyLevel + " ='" + str_getDiffList3 + "' return b." + difficultyLevel + ""
+    qtableValue = graph.run(exist).evaluate()
+    return qtableValue
+ #get the difficulty list that wants to update - new list
+def getNewRewardList(userid,languageName,rewardState):
+    exist = "MATCH(n: user_difficulty{uid: '" + userid + "'}) - [r: level]->(b:difficulty{technology: '" + languageName + "'}) return b."+rewardState+""
+    qtableValue = graph.run(exist).evaluate()
+    return qtableValue
+
+
 #get the easy, medium, hard to list
 def getDifficultyList(userid,langName,category):
     exist = "MATCH(n: user_difficulty{uid: '" + userid + "'}) - [r: level]->(b:difficulty{technology: '" + langName + "'}) return b." + category + ""
@@ -211,8 +224,8 @@ def getDifficultyList(userid,langName,category):
     return qtableValue
 
 #set the new value to node
-def sendNewDifficultyList(userid,langName,rewardState,str_getDiffList3):
-    exist = "MATCH(n: user_difficulty{uid: '" + userid + "'}) - [r: level]->(b:difficulty{technology: '" + langName + "'}) SET n." + rewardState + " ='" + str_getDiffList3 + "' return b." + rewardState + ""
+def sendNewDifficultyList(userid,languageName,rewardState,str_getDiffList4):
+    exist = "MATCH(n: user_difficulty{uid: '" + userid + "'}) - [r: level]->(b:difficulty{technology: '" + languageName + "'}) SET b." + rewardState + " = '" + str_getDiffList4 + "' return b."+rewardState+""
     qtableValue = graph.run(exist).evaluate()
     return qtableValue
 
