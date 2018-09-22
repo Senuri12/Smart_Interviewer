@@ -4,4 +4,4 @@ def startsession():
     NonTechnicalQuestions.generate_cv_questions()
     TechnicalQuestions.question_gen()
 
-# startsession()s
+# startsession()

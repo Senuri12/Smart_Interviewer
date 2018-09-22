@@ -1,5 +1,5 @@
 from Controller import test, NonTechnicalQuestions, ConnectionToNeo4j, TechnicalQuestionCreators, NestedQuestionCreator, \
-    SpeachToText
+    SpeachToText,CreateReward
 from Controller import DifficultyLevelSelector,vari
 import requests,math,random
 from gingerit.gingerit import GingerIt
@@ -152,6 +152,8 @@ def question_gen():
 
             actual_question = TechnicalQuestionCreators.gen_Question(technical_question,question_number,"nonnested")
             parser = GingerIt()
+            # CreateReward.rewardForQuestion(random_table,random_que,diff_level)
+
 
 
              # TextToSpeechConverter.text_to_speech(actual_question,lang)

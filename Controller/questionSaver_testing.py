@@ -1,2 +1,2 @@
 global gcpq
-gcpq = 'whats up niggar'
+gcpq = 'Tell about yourself'

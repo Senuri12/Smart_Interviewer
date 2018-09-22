@@ -7,7 +7,7 @@ Created on Sun Jun 17 21:54:23 2018
 
 import numpy as np
 from xml.etree import ElementTree as ET
-from BackEnd.Controller import ConnectionToNeo4j,vari
+from Controller import ConnectionToNeo4j,vari
 
 
 # ---------------------------------------------------------------------------------------------
