@@ -157,6 +157,7 @@ def getQuestionMarks(db,db2,userId,sessid,number):
 
 def sessionMarksStoring(Userid,Session,question,marks):
 
+    newSession = ""
 
     query = "MATCH(a: user{Userid: '"+Userid+"'}) return a.Userid"
     userExist = graph.run(query).evaluate()
@@ -166,20 +167,36 @@ def sessionMarksStoring(Userid,Session,question,marks):
         query1 = "MATCH(c: root{Name: 'Session'}) CREATE(c) - [x: rootTOuser]-> (a: user{Userid:'"+Userid+"'})"
         graph.run(query1).evaluate()
 
-    query3 = "MATCH(a: user{Userid: '"+Userid+"'}) - [r: userTOsession]->(b:session{no: '" + Session + "'}) return b.no"
-    sessionExist = graph.run(query3).evaluate()
 
-    if (sessionExist == None):
 
-        query4 = "MATCH(a: user{Userid: '"+Userid+"'}) CREATE(a) - [r: userTOsession]->(b:session{no: '" + Session + "'})"
-        graph.run(query4).evaluate()
 
-    query5 = "MATCH(a: user{Userid: '" + Userid + "'}) - [r: userTOsession]->(b:session{no: '" + Session + "',"+question+":'"+marks+"'}) return b.no"
+    if question == "question1":
+        query13 = "MATCH (n:session) RETURN n.no ORDER BY n.no DESC LIMIT 1;"
+        sessionExist1 = graph.run(query13).evaluate()
+        if sessionExist1== None:
+            sessionExist1 = 0
+        number = int(sessionExist1)+1
+        query14 = "MATCH(a: user{Userid: '"+Userid+"'}) CREATE(a) - [r: userTOsession]->(b:session{no: '" + str(number) + "'})"
+        graph.run(query14).evaluate()
+
+    # query3 = "MATCH(a: user{Userid: '"+Userid+"'}) - [r: userTOsession]->(b:session{no: '" + Session + "'}) return b.no"
+    # sessionExist = graph.run(query3).evaluate()
+    #
+    # if (sessionExist == None):
+    #
+    #     query4 = "MATCH(a: user{Userid: '"+Userid+"'}) CREATE(a) - [r: userTOsession]->(b:session{no: '" + Session + "'})"
+    #     graph.run(query4).evaluate()
+
+    query3 = "MATCH (n:session) RETURN n.no ORDER BY n.no DESC LIMIT 1;"
+    newSession = graph.run(query3).evaluate()
+
+
+    query5 = "MATCH(a: user{Userid: '" + Userid + "'}) - [r: userTOsession]->(b:session{no: '" + newSession + "',"+question+":'"+marks+"'}) return b.no"
     questionExist = graph.run(query5).evaluate()
 
     if (questionExist == None):
 
-        query6 = "MATCH(a: user{Userid: '"+Userid+"'}) - [r: userTOsession]->(b:session{no: '" + Session + "'}) SET b."+question+" = '"+marks+"' RETURN b"
+        query6 = "MATCH(a: user{Userid: '"+Userid+"'}) - [r: userTOsession]->(b:session{no: '" + newSession + "'}) SET b."+question+" = '"+marks+"' RETURN b"
         marking = graph.run(query6).evaluate()
 
     return questionExist

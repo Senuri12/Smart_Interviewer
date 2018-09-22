@@ -1,6 +1,7 @@
-from Controller import MainQuestionGenerator,AudioRecorder
-MainQuestionGenerator.startsession()
+# from Controller import MainQuestionGenerator,AudioRecorder
+# MainQuestionGenerator.startsession()
 # print(AudioRecorder.audio_recorder('1'))
+
 
 
 
@@ -19,8 +20,10 @@ q="java  overriding object  technical"
 # subsection = input("enter sub area : \n")
 # typer = input("enter type : \n")pickling
 value = []
-value = SpeachToText.validation("mocking", "nontechnical","nonested","question2")
-print(value[1])
+value = SpeachToText.validation("pickling", "technical","nonested","question2")
+print(value[0])
+
+
 
 #
 # import os

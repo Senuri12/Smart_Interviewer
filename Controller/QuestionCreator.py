@@ -3,6 +3,8 @@ import sys
 import nltk
 import re
 import time
+
+import os,glob
 from gingerit.gingerit import GingerIt
 
 import nltk
@@ -110,7 +112,11 @@ def gen_Question(keywords,qno):
     voice_record = AudioRecorder.audio_recorder(qno)
     answer_validity = SpeachToText.validation("", typo2, typo, "question" + str(qno))[0]
 
-
+    # if qno == "20" or qno == 20:
+    #
+    #     filelist = glob.glob("Audio/*.wav")
+    #     for file in filelist:
+    #         os.remove(file)
 
     return question
 
