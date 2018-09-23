@@ -127,7 +127,7 @@ def gen_Question(keywords,questionno,nesornot):
     print(vik_test_codes.question(question, questionno))
     print(question)
 
-
+    #oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
     voice_record = AudioRecorder.audio_recorder(questionno)
     answer_validity = SpeachToText.validation(keywords, "technical", nesornot, "question" + str(questionno))[0]
 

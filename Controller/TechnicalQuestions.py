@@ -45,16 +45,21 @@ def question_gen():
     prev2_ans_result= 0.2
 
     global prev1_que_count
-    prev1_que_count = 5
+    # prev1_que_count = 5
+    prev1_que_count = 6
+
 
     global prev2_que_count
-    prev2_que_count = 6
+    # prev2_que_count = 6
+    prev2_que_count = 7
 
     global user_diff
     user_diff = "user_difficulty"
 
     global db_diff
     db_diff = "difficulty"
+    global different_change_list
+    different_change_list= "False"
 
 
 
@@ -65,10 +70,13 @@ def question_gen():
     print("hey")
     global nested_question_ccount
     nested_question_ccount = 2
+    global final_itteration_value
 
 
 
     splitted_table_list = (tech_keywords.split(','))
+    # splitted_table_list.append("java")
+
     print(splitted_table_list)
     print("list is printed")
     splitted_table_list_length = len(splitted_table_list)
@@ -79,6 +87,9 @@ def question_gen():
     split_list_length = stable_splitted_table_list_length
     itteration_val = int(11 / split_list_length)
     itteration_value = math.floor(itteration_val)
+
+    final_itteration_value = itteration_value
+
 
     # get the nested value count after filling technologies
     rem_nested_count = 11 - (split_list_length * itteration_value)
@@ -91,7 +102,7 @@ def question_gen():
 
 
 
-    while splitted_table_list_length>=1:
+    while splitted_table_list_length >=1:
 
 
         random_table = random.choice(splitted_table_list)
@@ -111,36 +122,69 @@ def question_gen():
             q_list.append(id)
         print(q_list)
 
-        for itt in range(itteration_value):
-            print(itt)
+        # for itt in range(itteration_value):
+        while itteration_value>0:
+            print(itteration_value)
             print("my itteration")
-            print(itt)
+            print(itteration_value)
+            itteration_value = itteration_value-1
 
             # difficulty level  selection
             if prev1_ans_result >= 0.5 and prev2_ans_result >= 0.5:
                 diff_level = DifficultyLevelSelector.increase_difficulty_level(diff_level)
+                # prev1_que_count = prev1_que_count - 1
+                # prev2_que_count = prev2_que_count - 1
+                # print("this prevvvvvvvvvvvvvvvv")
+                # print(prev1_que_count)
+                # print(prev2_que_count)
+                # print("this prevvvvvvvvvvvvvvvv")
+
+
             elif prev1_ans_result < 0.5 and prev2_ans_result < 0.5:
                 diff_level = DifficultyLevelSelector.decrease_difficulty_level(diff_level)
+                # prev1_que_count = prev1_que_count - 1
+                # prev2_que_count = prev2_que_count - 1
+                # print("this prevvvvvvvvvvvvvvvv")
+                # print(prev1_que_count)
+                # print(prev2_que_count)
+                # print("this prevvvvvvvvvvvvvvvv")
             print(diff_level)
 
             # get the list of nodes according to the difficulty level
             taking_list = DifficultyLevelSelector.adding_diff_level_val_list(userId, user_diff,db_diff, random_table, diff_level)
             print(taking_list)
+            print(taking_list)
+
             print("hi i am the taking list")
 
             # comparing two lists to get the nodes that are in the q_list
             changed_know_list = set(q_list) & set(taking_list)
             print("i know it is hereeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
             print(changed_know_list)
+
             changed_know_list = list(changed_know_list)
+            # changed_know_list = None
 
             if not changed_know_list:
                 changed_know_list = q_list
+                different_change_list = "True"
+
+            print(changed_know_list)
+            print(changed_know_list)
+            print("changed_know_list")
 
             random_que = random.choice(changed_know_list)
             print(random_que)
+
             random_que_string = str(random_que)
             print(random_que_string)
+
+            if different_change_list == "True":
+                diff_level = DifficultyLevelSelector.change_difficulty_level(random_que_string,random_table)
+                print("diffffffffff")
+                print(diff_level)
+                print("difffffffffffffffffff")
+
             technical_question = ConnectionToNeo4j.technical_question_keyword(random_table,random_que_string)
             print("qu")
             print(technical_question)
@@ -154,6 +198,8 @@ def question_gen():
             parser = GingerIt()
 
             # CreateReward.rewardForQuestion(random_table,random_que,diff_level)
+
+            CreateReward.rewardForQuestion(random_table,random_que,diff_level)
 
 
 
@@ -180,7 +226,9 @@ def question_gen():
                 # answer_validity = test.test()
                 #answer_validity = input()
 
-            if itt>1 and nested_question_ccount>0:
+            # if itt>1 and nested_question_ccount>0:
+            if itteration_value > 1 and nested_question_ccount > 0:
+
                 filtered_words_string =SpeachToText.validation(technical_question, "technical","nonested","question"+str(question_number))
                 nested = NestedQuestionCreator.keywordSelector(random_table,filtered_words_string[1].lstrip(),"2",diff_level)
                 if nested != 0:
@@ -219,9 +267,13 @@ def question_gen():
             else:
                 print("false")
 
-            if itt == itteration_value-1 and splitted_table_list_length == 1 and nested_question_ccount>0 :
-                itteration_value = itteration_value + nested_question_ccount
-                nested_question_ccount == 0
+            # if itt == itteration_value-1 and splitted_table_list_length == 1 and nested_question_ccount>0 :
+            if  itteration_value == 1 and splitted_table_list_length == 0 and nested_question_ccount > 0:
+                itteration_value = itteration_value + 1
+
+                # itteration_value = itteration_value + nested_question_ccount
+                nested_question_ccount = nested_question_ccount - 1
+                print("it is trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
 
 
 
@@ -238,11 +290,12 @@ def question_gen():
             print(prev2_que_count)
 
             print("nooooooooooooooooooooooooooo")
-            if prev1_que_count == 7:
+            # if prev1_que_count == 7 and question_number<20:
+            if prev1_que_count == 7 and question_number<20:
                 prev1_ans_result = 0.2
                 prev2_ans_result = ConnectionToNeo4j.getQuestionMarks(db2,db3,userId,sessionId,p2_send_question)
                 prev2_ans_result = float(prev2_ans_result)
-            else:
+            elif question_number<20:
                 prev1_ans_result = ConnectionToNeo4j.getQuestionMarks(db2,db3,userId,sessionId,p1_send_question)
                 prev2_ans_result = ConnectionToNeo4j.getQuestionMarks(db2,db3,userId,sessionId,p2_send_question)
 
@@ -261,8 +314,7 @@ def question_gen():
             print(question_number)
             print("this is prev marksssssssssssss")
 
-
-
+        itteration_value = final_itteration_value
 
 
 

@@ -20,8 +20,14 @@ from Controller import ConnectionToNeo4j,vari
 
 def rewardForQuestion(languageName, nodeId, difficultyLevel):
     # languageName = "python"
-    # nodeId = 10
-    # difficultyLevel = "medium"
+    # nodeId = 17
+    # difficultyLevel = "hard"
+
+    print("ANURUDDHA")
+    # print(languageName)
+    print(nodeId)
+    print(difficultyLevel)
+
 
     userid = vari.userId
 
@@ -283,4 +289,4 @@ def rewardForQuestion(languageName, nodeId, difficultyLevel):
 
 
 
-
+# rewardForQuestion()

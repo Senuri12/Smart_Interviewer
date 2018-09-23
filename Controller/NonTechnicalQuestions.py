@@ -120,11 +120,12 @@ def generate_cv_questions():
                 tech = SpeachToText.validation("", typo2,typo,"question"+str(question_number))[1]
 
                 tech = NestedQuestionCreator.keywordSelector("",tech.lstrip(),"1","")
-                # print(tech)
-                # print("tech printed")
+                tech = "i know everything"
+                print(tech)
+                print("tech printed")
                 technology_list = NestedQuestionCreator.nonTechnicalKeywordSeelector(tech,modify_random_proj_que)
-                # print("hello tech")
-                # print(technology_list)
+                print("hello tech")
+                print(technology_list)
                 # print("check validity")
                 # answer_validity = input()
 

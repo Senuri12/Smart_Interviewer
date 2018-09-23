@@ -4,4 +4,4 @@ global userId
 userId = "uid001"
 
 global sessionId
-sessionId = "2"
+sessionId = "1"

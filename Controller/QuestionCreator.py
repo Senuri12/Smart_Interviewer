@@ -109,6 +109,8 @@ def gen_Question(keywords,qno):
     grammer_corrected_question = grammer_corrected_question_list.get("result")
     print(grammer_corrected_question)
     print(vik_test_codes.question(grammer_corrected_question, qno))
+
+    #jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
     voice_record = AudioRecorder.audio_recorder(qno)
     answer_validity = SpeachToText.validation("", typo2, typo, "question" + str(qno))[0]
 

@@ -74,6 +74,7 @@ def getTechNodeCount(db):
   query = "MATCH(a:language{Name:'"+db+"'}) - [r: has]->(b:sub{})RETURN count(*)"
   gen_count = graph.run(query).evaluate()
   # print(gen_count)
+  print("inside the function")
   return gen_count
 
 
@@ -110,16 +111,22 @@ def getMatchingTopicsNonTech(db):
     return availability
 
 
-def cvProjectTech(db,pid):
-  query = "MATCH (j:"+db+"{pid:'"+ pid+"'}) RETURN j.technologies"
+def cvProjectTech(db,db2,pid,userId):
+  # query = "MATCH (j:"+db+"{pid:'"+ pid+"'}) RETURN j.technologies"
+  query = "MATCH (j:" + db + "{pid:'" + pid + "'}) - [r: projects_details]->(b:" + db2 + "{uid:'" + userId + "'}) RETURN b.technologies"
   gen_Question = graph.run(query).evaluate()
+  print(gen_Question)
   return gen_Question
+# cvProjectTech("project","project_d","p1","uid001")
 
 #returns the difficulty level list
 def getdiffLevelList(userId,db,db2,techno,level):
     query = "MATCH (j:" + db + "{uid:'" + userId + "'}) - [r: level]->(b:" + db2 + "{technology:'" + techno + "'}) RETURN b." + level+""
     gen_list = graph.run(query).evaluate()
+    print("my generated list")
+
     print(gen_list)
+    print("my generated list")
     return gen_list
 
 def getNestedDiffLevelList(userId,db,db2,db3,techno,level):
@@ -156,30 +163,41 @@ def getQuestionMarks(db,db2,userId,sessid,number):
 # print(pro)
 
 def sessionMarksStoring(Userid,Session,question,marks):
+    newSession = ""
 
-
-    query = "MATCH(a: user{Userid: '"+Userid+"'}) return a.Userid"
+    query = "MATCH(a: user{Userid: '" + Userid + "'}) return a.Userid"
     userExist = graph.run(query).evaluate()
 
     if (userExist == None):
-
-        query1 = "MATCH(c: root{Name: 'Session'}) CREATE(c) - [x: rootTOuser]-> (a: user{Userid:'"+Userid+"'})"
+        query1 = "MATCH(c: root{Name: 'Session'}) CREATE(c) - [x: rootTOuser]-> (a: user{Userid:'" + Userid + "'})"
         graph.run(query1).evaluate()
 
-    query3 = "MATCH(a: user{Userid: '"+Userid+"'}) - [r: userTOsession]->(b:session{no: '" + Session + "'}) return b.no"
-    sessionExist = graph.run(query3).evaluate()
+    if question == "question1":
+        query13 = "MATCH (n:session) RETURN n.no ORDER BY n.no DESC LIMIT 1;"
+        sessionExist1 = graph.run(query13).evaluate()
+        if sessionExist1 == None:
+            sessionExist1 = 0
+        number = int(sessionExist1) + 1
+        query14 = "MATCH(a: user{Userid: '" + Userid + "'}) CREATE(a) - [r: userTOsession]->(b:session{no: '" + str(
+            number) + "'})"
+        graph.run(query14).evaluate()
 
-    if (sessionExist == None):
+    # query3 = "MATCH(a: user{Userid: '"+Userid+"'}) - [r: userTOsession]->(b:session{no: '" + Session + "'}) return b.no"
+    # sessionExist = graph.run(query3).evaluate()
+    #
+    # if (sessionExist == None):
+    #
+    #     query4 = "MATCH(a: user{Userid: '"+Userid+"'}) CREATE(a) - [r: userTOsession]->(b:session{no: '" + Session + "'})"
+    #     graph.run(query4).evaluate()
 
-        query4 = "MATCH(a: user{Userid: '"+Userid+"'}) CREATE(a) - [r: userTOsession]->(b:session{no: '" + Session + "'})"
-        graph.run(query4).evaluate()
+    query3 = "MATCH (n:session) RETURN n.no ORDER BY n.no DESC LIMIT 1;"
+    newSession = graph.run(query3).evaluate()
 
-    query5 = "MATCH(a: user{Userid: '" + Userid + "'}) - [r: userTOsession]->(b:session{no: '" + Session + "',"+question+":'"+marks+"'}) return b.no"
+    query5 = "MATCH(a: user{Userid: '" + Userid + "'}) - [r: userTOsession]->(b:session{no: '" + newSession + "'," + question + ":'" + marks + "'}) return b.no"
     questionExist = graph.run(query5).evaluate()
 
     if (questionExist == None):
-
-        query6 = "MATCH(a: user{Userid: '"+Userid+"'}) - [r: userTOsession]->(b:session{no: '" + Session + "'}) SET b."+question+" = '"+marks+"' RETURN b"
+        query6 = "MATCH(a: user{Userid: '" + Userid + "'}) - [r: userTOsession]->(b:session{no: '" + newSession + "'}) SET b." + question + " = '" + marks + "' RETURN b"
         marking = graph.run(query6).evaluate()
 
     return questionExist
@@ -198,18 +216,12 @@ def sendQtable(languageName,qTableCreated):
     qtableValue1 = graph.run(query).evaluate()
     return qtableValue1
 
-# another method
-def edit_username(R):
-    person = graph.merge_one('language', 'qtable')
-    person['qtable'] = R
-    person.push()
-
-
 #send the node list updated existing category-asked 1 remove krarapu 1
 def sendExistingDifficultyList(userid,languageName,difficultyLevel,str_getDiffList3):
     exist = "MATCH(n: user_difficulty{uid: '" + userid + "'}) - [r: level]->(b:difficulty{technology: '" + languageName + "'}) SET b." + difficultyLevel + " ='" + str_getDiffList3 + "' return b." + difficultyLevel + ""
     qtableValue = graph.run(exist).evaluate()
     return qtableValue
+
  #get the difficulty list that wants to update - new list
 def getNewRewardList(userid,languageName,rewardState):
     exist = "MATCH(n: user_difficulty{uid: '" + userid + "'}) - [r: level]->(b:difficulty{technology: '" + languageName + "'}) return b."+rewardState+""
@@ -221,6 +233,8 @@ def getNewRewardList(userid,languageName,rewardState):
 def getDifficultyList(userid,langName,category):
     exist = "MATCH(n: user_difficulty{uid: '" + userid + "'}) - [r: level]->(b:difficulty{technology: '" + langName + "'}) return b." + category + ""
     qtableValue = graph.run(exist).evaluate()
+    print("hello anuruddha")
+    print(qtableValue)
     return qtableValue
 
 #set the new value to node
