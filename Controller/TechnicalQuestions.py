@@ -132,22 +132,11 @@ def question_gen():
             # difficulty level  selection
             if prev1_ans_result >= 0.5 and prev2_ans_result >= 0.5:
                 diff_level = DifficultyLevelSelector.increase_difficulty_level(diff_level)
-                # prev1_que_count = prev1_que_count - 1
-                # prev2_que_count = prev2_que_count - 1
-                # print("this prevvvvvvvvvvvvvvvv")
-                # print(prev1_que_count)
-                # print(prev2_que_count)
-                # print("this prevvvvvvvvvvvvvvvv")
 
 
             elif prev1_ans_result < 0.5 and prev2_ans_result < 0.5:
                 diff_level = DifficultyLevelSelector.decrease_difficulty_level(diff_level)
-                # prev1_que_count = prev1_que_count - 1
-                # prev2_que_count = prev2_que_count - 1
-                # print("this prevvvvvvvvvvvvvvvv")
-                # print(prev1_que_count)
-                # print(prev2_que_count)
-                # print("this prevvvvvvvvvvvvvvvv")
+
             print(diff_level)
 
             # get the list of nodes according to the difficulty level

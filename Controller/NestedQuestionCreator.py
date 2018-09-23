@@ -35,7 +35,7 @@ def keywordSelector(db,filtered_words_string,param,diff_level):
         lower_case_val = val.lower()
         unique_filtered_words.add(lower_case_val)
     # added
-    unique_filtered_words.add("tupple")
+    # unique_filtered_words.add("tupple")
     print(unique_filtered_words)
     print("unique_filtered_words")
 
