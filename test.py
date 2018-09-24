@@ -1,5 +1,5 @@
 global questions
-questions = "how are you"
+questions = "Can you explain about overriding"
 
 
 # set FLASK_APP=server.py

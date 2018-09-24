@@ -1,2 +1,2 @@
 global results12
-results12 = 'yes'
+results12 = 'no'

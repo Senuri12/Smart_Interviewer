@@ -250,9 +250,49 @@ def sendNewDifficultyList(userid,languageName,rewardState,str_getDiffList4):
     return qtableValue
 
 
+#create a cv
+def createNewCv(userid,fname,usage,usschool,usuni,usdob,usemail,ustpno,usweak,usstrengh,usidlcmp,usftech,usproone,ustech1,usprotwo,ustech2):
+# def createNewCv(userid, usweak):
+    print("hi")
+    exist = "MATCH(c: CV{topic: 'yourself'}) CREATE(c) - [x: your_detail]-> (a: yourdet{uid:'" + userid + "',name:'"+fname+"',age:'"+usage+"',school:'"+usschool+"',university:'"+usuni+"', dob:'"+usdob+"',email:'"+usemail+"',telephone:'"+ustpno+"'})"
+    createdCvUserDetail = graph.run(exist).evaluate()
+    print(createdCvUserDetail)
+
+    exist2 = "MATCH(c: CV{topic: 'your weaknesses'}) SET c."+userid+" = '"+usweak+"' "
+    createdCvWeakDetail = graph.run(exist2).evaluate()
+    print(createdCvWeakDetail)
 
 
+    exist3 = "MATCH(c: CV{topic: 'your strengths'}) SET c." + userid + " = '" + usstrengh + "' "
+    createdCvStrenDetail = graph.run(exist3).evaluate()
+    print(createdCvStrenDetail)
 
+
+    exist4 = "MATCH(c: CV{topic: 'your ideal company'}) SET c." + userid + " = '" + usidlcmp + "' "
+    createdCvIdlCmpDetail = graph.run(exist4).evaluate()
+    print(createdCvIdlCmpDetail)
+
+
+    exist5 = "MATCH(c: CV{topic: 'familiar technologies'}) SET c." + userid + " = '" + usftech + "' "
+    createdCvFTechDetail = graph.run(exist5).evaluate()
+    print(createdCvFTechDetail)
+
+
+    exist6 = "MATCH(c: project{pid: 'p1'}) CREATE(c) - [x: projects_details]-> (a: yourdet{uid:'" + userid + "',topic:'"+usproone+"',technologies:'"+ustech1+"'})"
+    createdCvProOneDetail = graph.run(exist6).evaluate()
+    print(createdCvProOneDetail)
+
+
+    exist6 = "MATCH(c: project{pid: 'p2'}) CREATE(c) - [x: projects_details]-> (a: yourdet{uid:'" + userid + "',topic:'" + usprotwo + "',technologies:'" + ustech2 + "'})"
+    createdCvProOneDetail = graph.run(exist6).evaluate()
+    print(createdCvProOneDetail)
+
+
+    print(usweak)
+
+# createNewCv("uid001","Vikum Nidarshana","24","Ananda College","sliit","1994-03-28","vikum@gmail.com","07771456325")
+#
+# createNewCv("uid003","i can run")
 
 
 
