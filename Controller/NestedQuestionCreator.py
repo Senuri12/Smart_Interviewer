@@ -3,6 +3,7 @@ import random
 
 
 # db = "python"
+#checks whether the topics are available to create a nested question if exist returns a topic
 def keywordSelector(db,filtered_words_string,param,diff_level):
     db2 ="user_difficulty"
     db3 = "difficulty"
@@ -115,6 +116,7 @@ def keywordSelector(db,filtered_words_string,param,diff_level):
 # keyword = keywordSelector();
 # for()
 
+#gets the technical keyword list and if no topic available access the db and gets the values
 def nonTechnicalKeywordSeelector(names,project):
     user_id = vari.userId
 

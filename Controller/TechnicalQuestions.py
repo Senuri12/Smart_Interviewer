@@ -74,6 +74,7 @@ def question_gen():
 
 
 
+    #decide the count of questions that should be generated from one technology
     splitted_table_list = (tech_keywords.split(','))
     # splitted_table_list.append("java")
 
@@ -101,7 +102,7 @@ def question_gen():
     print(itteration_value)
 
 
-
+#selects a keyword from technology list
     while splitted_table_list_length >=1:
 
 
@@ -122,6 +123,7 @@ def question_gen():
             q_list.append(id)
         print(q_list)
 
+#generate questions according to question count
         # for itt in range(itteration_value):
         while itteration_value>0:
             print(itteration_value)
@@ -132,18 +134,14 @@ def question_gen():
             # difficulty level  selection
             if prev1_ans_result >= 0.5 and prev2_ans_result >= 0.5:
                 diff_level = DifficultyLevelSelector.increase_difficulty_level(diff_level)
-
-
             elif prev1_ans_result < 0.5 and prev2_ans_result < 0.5:
                 diff_level = DifficultyLevelSelector.decrease_difficulty_level(diff_level)
-
             print(diff_level)
 
             # get the list of nodes according to the difficulty level
             taking_list = DifficultyLevelSelector.adding_diff_level_val_list(userId, user_diff,db_diff, random_table, diff_level)
             print(taking_list)
             print(taking_list)
-
             print("hi i am the taking list")
 
             # comparing two lists to get the nodes that are in the q_list
@@ -168,6 +166,7 @@ def question_gen():
             random_que_string = str(random_que)
             print(random_que_string)
 
+            #changes the difficulty level if there are no nodes availabble for the exisisting difficulties
             if different_change_list == "True":
                 diff_level = DifficultyLevelSelector.change_difficulty_level(random_que_string,random_table)
                 print("diffffffffff")
@@ -186,11 +185,8 @@ def question_gen():
             actual_question = TechnicalQuestionCreators.gen_Question(technical_question,question_number,"nonnested")
             parser = GingerIt()
 
-            # CreateReward.rewardForQuestion(random_table,random_que,diff_level)
-
+            #creates the difficulty levels
             CreateReward.rewardForQuestion(random_table,random_que,diff_level)
-
-
 
              # TextToSpeechConverter.text_to_speech(actual_question,lang)
             qprinted = qprinted+1;
@@ -205,10 +201,6 @@ def question_gen():
             # answer_validity = test.test()
             # answer_validity = input()
 
-
-
-
-
             # while (answer_validity == "null"):
                 # print(vik_test_codes.question(question_number))
 
@@ -216,6 +208,8 @@ def question_gen():
                 #answer_validity = input()
 
             # if itt>1 and nested_question_ccount>0:
+
+            #generates nested questions if keyword are available
             if itteration_value > 1 and nested_question_ccount > 0:
 
                 filtered_words_string =SpeachToText.validation(technical_question, "technical","nonested","question"+str(question_number))
@@ -240,15 +234,6 @@ def question_gen():
                     nested_question_ccount = nested_question_ccount - 1
                     print(nested)
 
-
-                    # answer_validity = test.test()
-                    # answer_validity =input()
-                    #
-                    # while (answer_validity == "null"):
-                    #
-                    #
-                    #     # answer_validity = test.test()
-                    #     answer_validity = input()
                 else:
                     print("when ignores")
                 print("true")
@@ -256,6 +241,7 @@ def question_gen():
             else:
                 print("false")
 
+            #gets the correct question number for a sesson if no nested questions
             # if itt == itteration_value-1 and splitted_table_list_length == 1 and nested_question_ccount>0 :
             if  itteration_value == 1 and splitted_table_list_length == 0 and nested_question_ccount > 0:
                 itteration_value = itteration_value + 1
@@ -280,6 +266,7 @@ def question_gen():
 
             print("nooooooooooooooooooooooooooo")
             # if prev1_que_count == 7 and question_number<20:
+            #get the result of the previous two questions
             if prev1_que_count == 7 and question_number<20:
                 prev1_ans_result = 0.2
                 prev2_ans_result = ConnectionToNeo4j.getQuestionMarks(db2,db3,userId,sessionId,p2_send_question)
@@ -315,22 +302,3 @@ def question_gen():
 
 
 
-                # techs = NonTechnicalQuestions.technology_list
-    # print(techs)
-    # lang = 'en'
-    # q_list = []
-    # for id in range(1,5):
-    #     q_list.append(str(id))
-    #
-    # print(q_list)
-    #
-    # for question_no  in range(4):
-    #     time.sleep(5)
-    #     random_que = random.choice(q_list)
-    #     technical_question=ConnectionToNeo4j.ontologyQuestionGen(random_que)
-    #     q_list.remove(random_que)
-    #     actual_question = "What is "+technical_question+"?"
-    #     TextToSpeechConverter.text_to_speech(actual_question, lang)
-    #     print(actual_question)
-    #
-# question_gen()

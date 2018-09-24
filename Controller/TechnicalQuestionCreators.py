@@ -22,6 +22,7 @@ keywords ="multiple inheritance"
 
 question = ""
 
+#gets the keyword and creates a technical question
 
 def gen_Question(keywords,questionno,nesornot):
     global question
@@ -36,7 +37,6 @@ def gen_Question(keywords,questionno,nesornot):
             # gen_Question(namedEnt)
             # namedEnt.draw()
 
-
         key, words = zip(*tagged)
         #print(key)
 
@@ -49,9 +49,6 @@ def gen_Question(keywords,questionno,nesornot):
         print(a)
         print("hey")
         # print([b for b, v in a.items() if v in l1])
-
-
-
 
     except Exception as e:
         print(str(e))
@@ -127,7 +124,6 @@ def gen_Question(keywords,questionno,nesornot):
     print(vik_test_codes.question(question, questionno))
     print(question)
 
-    #oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
     voice_record = AudioRecorder.audio_recorder(questionno)
     answer_validity = SpeachToText.validation(keywords, "technical", nesornot, "question" + str(questionno))[0]
 
@@ -136,10 +132,6 @@ def gen_Question(keywords,questionno,nesornot):
     #     filelist = glob.glob("Audio/*.wav")
     #     for file in filelist:
     #         os.remove(file)
-
-
-
-
 
 
     return question

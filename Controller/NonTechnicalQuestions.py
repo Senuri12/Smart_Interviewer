@@ -16,6 +16,7 @@ userid = vari.userId
 
 
 
+#gnerates non technical questions
 def generate_cv_questions():
     global grammer_corrected_pr0ject_question
     db = "CV"
@@ -35,6 +36,7 @@ def generate_cv_questions():
     global question_number
     question_number = 0
 
+#generates questions from the three sections
     while count<=3:
         session = session + 1
         print("session")
@@ -81,7 +83,7 @@ def generate_cv_questions():
             # print("hiiiiiiiiiiiiiiiiii printing count")
 
 
-
+            #gets an input to ask questions
             if random_que=="5":
                 # voice_record = AudioRecorder.audio_recorder(question_number)
                 # answer_validity = SpeachToText.validation("", typo2, typo, "question" + str(question_number))[0]
@@ -105,12 +107,6 @@ def generate_cv_questions():
                 # parser = GingerIt()
                 # grammer_corrected_project_question_list = parser.parse(actual_project_question)
                 # grammer_corrected_pr0ject_question = grammer_corrected_project_question_list.get("result")
-
-
-
-
-
-
 
                 # TextToSpeechConverter.text_to_speech(grammer_corrected_pr0ject_question, lang)
                 # print(question_number)
@@ -140,18 +136,12 @@ def generate_cv_questions():
             #     answer_validity = SpeachToText.validation("", typo2,typo,"question"+str(question_number))[0]
 
 
-
-
         q_list = []
         count = count+1
 
 
 
-#
-# node_Count = ConnectionToNeo4j.getNodeCount(db)
-#
-# process_content()
-# print((word, tag)for word, tag in sentence if tag in ('NN', 'JJ'))
+
 
 
 
