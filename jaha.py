@@ -12,17 +12,34 @@
 
 
 
-from Controller import SpeachToText
+# from Controller import SpeachToText
+#
+#
+# q="java  overriding object  technical"
+#
+# # subsection = input("enter sub area : \n")
+# # typer = input("enter type : \n")pickling
+# value = []
+# value = SpeachToText.validation("pickling", "technical","nonested","question2")
+# print(value[0])
+
+# def go():
 
 
-q="java  overriding object  technical"
+# from Controller import SpeachToText
+#
+#
+# q="java  overriding object  technical"
+#
+# # subsection = input("enter sub area : \n")
+# # typer = input("enter type : \n")pickling
+# value = []
+# value = SpeachToText.validation("pickling", "technical","nonested","question5")
+# print(value[0])
 
-# subsection = input("enter sub area : \n")
-# typer = input("enter type : \n")pickling
-value = []
-value = SpeachToText.validation("pickling", "technical","nonested","question2")
-print(value[0])
 
+# for x in range(0, 20):
+#     print("We're on time %d" % (x))
 
 
 #

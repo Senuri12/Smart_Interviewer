@@ -1,5 +1,6 @@
 from py2neo import Graph
-
+from Controller import vari
+import json
 graph = Graph("http://neo4j:Sepalika1993@127.0.0.1:7474/db/data")
 
 
@@ -9,7 +10,98 @@ def ontologyQuestionGen(id):
   # print(gen_Question)
   return gen_Question
 
+
+def noofsessions():
+  query = "MATCH(a: user{Userid: '"+vari.userId+"'}) - [r: userTOsession]->(n:session) RETURN count(n)"
+  gen_Question = graph.run(query).evaluate()
+  # print(gen_Question)
+  return gen_Question
+
+
+
+def getsessionmarks(no):
+  result ={}
+  for x in range(0, 20):
+     query = "MATCH(a: user{Userid: '" + vari.userId + "'}) - [r: userTOsession]->(n:session{no:'" + no + "'}) RETURN n.question"+str(x+1)
+     gen_Question = graph.run(query).evaluate()
+     result['q' + str(x + 1)] = str(gen_Question)
+
+  return result
+
+
+
+
+
+def getsessionmarks1():
+  query13 = "MATCH (n:session) RETURN n.no ORDER BY n.no DESC LIMIT 1;"
+  sessionExist1 = graph.run(query13).evaluate()
+
+
+  result ={}
+  for x in range(0, 20):
+     query = "MATCH(a: user{Userid: '" + vari.userId + "'}) - [r: userTOsession]->(n:session{no:'" + sessionExist1 + "'}) RETURN n.question"+str(x+1)
+     gen_Question = graph.run(query).evaluate()
+     result['q' + str(x + 1)] = str(gen_Question)
+
+  return result
+
+
+
+
+
+
+
+
+
+
+def login(email):
+
+  query = "MATCH (j:oneUser{email:'" + email + "'}) RETURN j.id"
+  useridz = graph.run(query).evaluate()
+
+  open('Controller/vari.py', 'w').close()
+  fruits = ["global userId\n", "userId = '" + useridz+"'"]
+  new_file = open("Controller/vari.py", mode="a+", encoding="utf-8")
+  new_file.writelines(fruits)
+  for line in new_file:
+      print(line)
+
+  new_file.close()
+
+
+
+
+
+  email = str(email)
+  query = "MATCH (j:oneUser{email:'"+email+"'}) RETURN j.password"
+  gen_Question = graph.run(query).evaluate()
+  # print(gen_Question)
+  return gen_Question
+
 # ontologyQuestionGen("1")
+
+
+
+def register(un,pw,email):
+
+  useridzz=""
+  query13 = "MATCH (n:oneUser) RETURN n.id ORDER BY n.id DESC LIMIT 1"
+  useridz = graph.run(query13).evaluate()
+
+  if useridz == None:
+      useridzz = "uid001"
+  else:
+      no = int(useridz[3:])+1
+      if len(str(no))==1:
+          useridzz ="uid00"+str(no)
+      elif len(str(no))==2:
+          useridzz ="uid0"+str(no)
+      elif len(str(no))==3:
+          useridzz ="uid"+str(no)
+
+  query = "MATCH(c: loginUser{Name: 'userdb'}) CREATE(c) - [x: has_users]-> (a: oneUser{id:'"+useridzz+"',username :'"+un+"',email:'"+email+"',password:'"+pw+"'})"
+  graph.run(query).evaluate()
+  return ""
 
 
 def getValueFromdb(subsection,type):

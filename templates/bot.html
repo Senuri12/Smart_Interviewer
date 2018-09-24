@@ -11,7 +11,7 @@
         <link href="../static/bot/vendor/swiper/swiper.min.css" rel="stylesheet" type="text/css"/>
         <link href="../static/bot/css/style.css" rel="stylesheet" type="text/css"/>
         <link href="../static/bot/css/global/global.css" rel="stylesheet" type="text/css"/>
-        <link rel="shortcut icon" href="../static/bot/img/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../static//img/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="../static/bot/img/apple-touch-icon.png">
 		<script type='text/javascript' src="../static/bot/js/sdk.js"></script>
 		<script type='text/javascript'>
@@ -53,6 +53,14 @@
                     qu = String(rico.ques)
                         if (qu=="end"){
                         myStopFunction();
+
+                            if (confirm("View results")) {
+                                window.location.href = "/results"
+                            } else {
+
+                            }
+
+
                         }
                         else {
                             SDK.applicationId = "7050569155936094438";
@@ -173,7 +181,7 @@
                     <div class="s-header__navbar-row-col">
                             <!-- logo -->
                             <div class="s-header__logo">
-                                <a href="home.html" class="s-header__logo-link">
+                                <a href="/home" class="s-header__logo-link">
                                     <img class="s-header__logo-img s-header__logo-img-default" src="../static/bot/img/logo.png" >
                                     <img class="s-header__logo-img s-header__logo-img-shrink" src="../static/bot/img/logo-dark.png" >
                                 </a>
@@ -203,15 +211,9 @@
                     <div class="container-fluid">
                         <!-- Menu List -->
                         <ul class="list-unstyled s-header__nav-menu">
-                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="http://localhost:8080/UEE_ASSIGNMENT/about.html">About Us</a></li>
-                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="http://localhost:8080/UEE_ASSIGNMENT/Comunity.html">Community</a></li>
-                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="http://localhost:8080/UEE_ASSIGNMENT/LatestInfo.html">Latest Information</a></li>
-                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="http://localhost:8080/UEE_ASSIGNMENT/filter.html">Guide Me</a></li>
-                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="http://localhost:8080/UEE_ASSIGNMENT/ContactUs.html">Contact Us</a></li>
-                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="http://localhost:8080/UEE_ASSIGNMENT/faq.html">Qusetions and Answers</a></li>
-
-
-                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="http://localhost:8080/UEE_ASSIGNMENT/">log out</a></li>
+                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="/home">Go to the home page</a></li>
+                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="/history">View results history</a></li>
+                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="/">log out</a></li>
 
                         </ul>
                         <!-- End Menu List -->

@@ -52,11 +52,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<h1>Register</h1>
 		<div class="main-agileinfo">
 			<div class="agileits-top">
-				<form action="#" method="post">
-					<input class="text" type="text" name="Username" placeholder="Username" required="">
-					<input class="text email" type="email" name="email" placeholder="Email" required="">
-					<input class="text" type="password" name="password" placeholder="Password" required="">
-					<input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" required="">
+				<form >
+					<input class="text" type="text" name="Username" placeholder="Username" required="" id="un">
+					<input class="text email" type="email" name="email" placeholder="Email" required="" id="email">
+					<input class="text" type="password" name="password" placeholder="Password" required="" id="pw">
+					<input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" required="" id="cpw">
 					<div class="wthree-text">
 						<label class="anim">
 							<input type="checkbox" class="checkbox" required="">
@@ -64,28 +64,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</label>
 						<div class="clear"> </div>
 					</div>
-					<input type="submit" value="SIGNUP">
+
 				</form>
-				<p>Don't have an Account? <a href="/"> Login Now!</a></p>
+<input type="submit" value="SIGNUP" onclick="registera()">
+				<p>You have an Account? <a href="/"> Login Now!</a></p>
 			</div>
 		</div>
 		<!-- copyright -->
-		<footer class="g-bg-color--dark" style="margin-top: 850px">
-    	<!-- Copyright -->
-        <div class="container g-padding-y-50--xs">
-        	<div class="row">
-            	<div class="col-xs-6">
-                	<a href="http://localhost:8080/UEE_ASSIGNMENT/home.html">
-                    	<img class="g-width-100--xs g-height-auto--xs" style=" max-height: 50px;max-width: 50px" src="../static/img/logo.png">
-                   	</a>
-                </div>
-                <div class="col-xs-6 g-text-right--xs">
-                    <p class="g-font-size-14--xs g-margin-b-0--xs g-color--white-opacity-light"><a href="http://localhost:8080/UEE_ASSIGNMENT/home.html">The Hand</a><a> copyright © since 2017</a></p>
-                </div>
-             </div>
-        </div>
-        <!-- End Copyright -->
-     </footer>
+
 		<!-- //copyright -->
 		<ul class="colorlib-bubbles">
 			<li></li>
@@ -100,8 +86,149 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<li></li>
 		</ul>
 	</div>
-	<!-- //main -->
- <script type="text/javascript" src="../static/vendor/jquery.min.js"></script>
+
+
+
+
+    <script>
+        function registera() {
+            var a = formValidation();
+            console.log(a);
+            if(a){
+                var uname = document.getElementById("un").value;
+                var uemail = document.getElementById("email").value;
+                var passid = document.getElementById("pw").value;
+
+                console.log(uname);
+
+                $.post("/registerdata", {
+                    username: uname,
+                    email: uemail,
+                    password: passid});
+                if (confirm("successfully registered login now?")) {
+        window.location.href = '/';
+    } else {
+        window.location.href = '/signup';
+    }
+
+
+                {#$.get( "/register/<uname>/<uemail>/<passid>" );#}
+
+
+
+            }
+            else {
+
+            }
+
+        }
+        function formValidation()
+        {
+
+
+            var uname = document.getElementById("un").value;
+            var uemail = document.getElementById("email").value;
+            var passid = document.getElementById("pw").value;
+            var conpw = document.getElementById("cpw").value;
+
+
+            if(allLetter(uname))
+            {
+                if(passid_validation(passid,7,12)&& comparepw(passid,conpw))
+                {
+                        if(ValidateEmail(uemail))
+                        {
+                            return true;
+                        }
+                        else {
+                return false;
+            }
+                }
+                else {
+                return false;
+            }
+            }
+            else {
+                return false;
+            }
+
+        }
+        function passid_validation(passid,mx,my)
+        {
+        var passid_len = passid.length;
+        if (passid_len == 0 ||passid_len >= my || passid_len < mx)
+        {
+        alert("Password should not be empty / length be between "+mx+" to "+my);
+
+        return false;
+        }
+        return true;
+        }
+
+
+        function comparepw(passid,conpw)
+        {
+            if(passid==conpw){
+                return true;
+            }
+            else {
+                alert("Entered passwords are not equal");
+                return false
+            }
+        }
+
+        function ValidateEmail(uemail)
+        {
+        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if(uemail.match(mailformat))
+        {
+        return true;
+        }
+        else
+        {
+        alert("You have entered an invalid email address!");
+
+        return false;
+        }
+        }
+
+        function allLetter(uname)
+        {
+        var letters = /^[A-Za-z]+$/;
+        if(uname.match(letters))
+        {
+        return true;
+        }
+        else
+        {
+        alert('Username must have alphabet characters only');
+        {#uname.focus();#}
+        return false;
+        }
+        }
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../static/vendor/jquery.min.js"></script>
 	        <script type="text/javascript" src="../static/vendor/jquery.migrate.min.js"></script>
 	        <script type="text/javascript" src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
 	        <script type="text/javascript" src="../static/vendor/jquery.smooth-scroll.min.js"></script>
