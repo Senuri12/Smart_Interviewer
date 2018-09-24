@@ -107,7 +107,14 @@
 
 		function callz() {
             {document.getElementById("starterx").style.display="none";}
-            myFunction();
+
+
+            $.get("/trigerquestion", function(data) {
+                console.log($.parseJSON(data))
+                myFunction();
+            })
+
+
             {#window.setInterval("myFunction()", 10000);#}
             myVar = setInterval("myFunction()", 20000);
 

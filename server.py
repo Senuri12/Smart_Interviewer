@@ -1,10 +1,12 @@
+import os
 from flask import Flask, render_template,request
 import json
-from Controller import vari,TechnicalQuestions,NonTechnicalQuestions,MainQuestionGenerator,questionSaver_testing,ConnectionToNeo4j
+from Controller import vari,TechnicalQuestions,NonTechnicalQuestions,questionSaver_testing,ConnectionToNeo4j
 #test eka wenuwata sarindige py file name eka danna haha1 method eka athuleth change karanna
 import test
 import userDetails,jaha
 from threading import Thread
+import time
 
 
 
@@ -37,15 +39,26 @@ def profile():
 @app.route('/dum')
 def haha1():
 
-    async_slow_function()
+    time.sleep(2)
+
     result = {"ques": questionSaver_testing.gcpq}
     return json.dumps(result)
 
 
 
-def slow_function():
+@app.route('/trigerquestion')
+def get_python_data():
 
-    jaha.go()
+
+    # async_slow_function()
+    pythondata = {"haha":"haha"}
+    return json.dumps(pythondata)
+
+
+
+def slow_function():
+    print("aa")
+    # MainQuestionGenerator.startsession()
 
 def async_slow_function():
     thr = Thread(target=slow_function)
@@ -90,6 +103,8 @@ def get_post_javascript_data():
 
 @app.route('/getloginresult')
 def haha2():
+
+    time.sleep(2)
 
     result = {"joking": userDetails.results12}
     return json.dumps(result)
@@ -324,6 +339,7 @@ def get_post_cv_javascript_data():
 @app.route('/registerdata', methods = ['POST'])
 def get_post_javascript_data1():
     print("lalala")
+
     un = str(request.form['username'])
     pw = str(request.form['password'])
     email = str(request.form['email'])

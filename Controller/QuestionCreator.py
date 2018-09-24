@@ -12,7 +12,7 @@ from nltk.corpus import state_union
 from nltk.tokenize import PunktSentenceTokenizer
 import random,time
 from Controller import vik_test_codes
-from Controller  import ConnectionToNeo4j,TextToSpeechConverter,QuestionCreator,NestedQuestionCreator,vari,AudioRecorder,SpeachToText
+from Controller  import ConnectionToNeo4j,QuestionCreator,NestedQuestionCreator,vari,AudioRecorder,SpeachToText
 
 sys.path.insert(0, '../Database')
 from Database import NonTechnicalQuestionDirectory

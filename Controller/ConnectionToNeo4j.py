@@ -18,6 +18,14 @@ def noofsessions():
 
 
 
+
+def mostrecentsession(emails):
+    query13 = "MATCH (a: user{email: '" +emails+ "'}) - [r: userTOsession]->(n:session) RETURN n.no ORDER BY n.no DESC LIMIT 1;"
+    sessionExist1 = graph.run(query13).evaluate()
+    return sessionExist1
+
+
+
 def getsessionmarks(no):
   result ={}
   for x in range(0, 20):
@@ -54,12 +62,19 @@ def getsessionmarks1():
 
 
 def login(email):
-
+  session = ""
   query = "MATCH (j:oneUser{email:'" + email + "'}) RETURN j.id"
   useridz = graph.run(query).evaluate()
 
+  if(mostrecentsession(email)==None):
+      session = "1"
+  else:
+      no = int(mostrecentsession(email))+1
+      session=str(no)
+
   open('Controller/vari.py', 'w').close()
-  fruits = ["global userId\n", "userId = '" + useridz+"'"]
+  fruits = ["global userId\n", "userId = '" + useridz+ "'\n", "global sessionId\n", "sessionId = '" + session + "'\n"]
+
   new_file = open("Controller/vari.py", mode="a+", encoding="utf-8")
   new_file.writelines(fruits)
   for line in new_file:
@@ -82,6 +97,7 @@ def login(email):
 
 
 def register(un,pw,email):
+  print("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss")
 
   useridzz=""
   query13 = "MATCH (n:oneUser) RETURN n.id ORDER BY n.id DESC LIMIT 1"
@@ -251,6 +267,17 @@ def sessionMarksStoring(Userid,Session,question,marks):
         number = int(sessionExist1)+1
         query14 = "MATCH(a: user{Userid: '"+Userid+"'}) CREATE(a) - [r: userTOsession]->(b:session{no: '" + str(number) + "'})"
         graph.run(query14).evaluate()
+#############################################################################################think
+        open('Controller/vari.py', 'w').close()
+        fruits = ["global userId\n", "userId = '" + Userid + "'\n", "global sessionId\n",
+                  "sessionId = '" + str(number) + "'\n"]
+
+        new_file = open("Controller/vari.py", mode="a+", encoding="utf-8")
+        new_file.writelines(fruits)
+        for line in new_file:
+            print(line)
+
+        new_file.close()
 
     # query3 = "MATCH(a: user{Userid: '"+Userid+"'}) - [r: userTOsession]->(b:session{no: '" + Session + "'}) return b.no"
     # sessionExist = graph.run(query3).evaluate()

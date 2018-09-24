@@ -10,11 +10,12 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 
 # technology_list = []
-userid = vari.userId
+
 
 
 #gnerates non technical questions
 def generate_cv_questions():
+    userid = vari.userId
     global grammer_corrected_pr0ject_question
     db = "CV"
     db2= "project"
