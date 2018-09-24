@@ -1,9 +1,19 @@
 from flask import Flask, render_template,request
 import json
+<<<<<<< HEAD
 from Controller import TechnicalQuestions,NonTechnicalQuestions,MainQuestionGenerator,questionSaver_testing,ConnectionToNeo4j
 #test eka wenuwata sarindige py file name eka danna haha1 method eka athuleth change karanna
 import test
 import userDetails,jaha
+=======
+from Controller import vari
+
+import userDetails
+from Controller import TechnicalQuestions,NonTechnicalQuestions,MainQuestionGenerator,questionSaver_testing,ConnectionToNeo4j
+#test eka wenuwata sarindige py file name eka danna haha1 method eka athuleth change karanna
+import test
+# import userDetails,jaha
+>>>>>>> 7bec7cd487b975d75de0d536ce92184ea9e38163
 from threading import Thread
 
 
@@ -37,10 +47,24 @@ def profile():
 @app.route('/dum')
 def haha1():
 
+<<<<<<< HEAD
     async_slow_function()
+=======
+    # async_slow_function()
+>>>>>>> 7bec7cd487b975d75de0d536ce92184ea9e38163
     result = {"ques": questionSaver_testing.gcpq}
     return json.dumps(result)
 
+
+#
+# def slow_function():
+#
+#     jaha.go()
+#
+# def async_slow_function():
+#     thr = Thread(target=slow_function)
+#     thr.start()
+#     return thr
 
 
 def slow_function():
@@ -138,6 +162,7 @@ def history():
     return render_template('history.html')
 
 
+<<<<<<< HEAD
 
 @app.route('/results')
 def results():
@@ -180,6 +205,11 @@ def chartsa():
 
 
     return json.dumps(val)
+=======
+@app.route('/cv')
+def cv():
+    return render_template('cvform.html')
+>>>>>>> 7bec7cd487b975d75de0d536ce92184ea9e38163
 # @app.route('/dum5')
 # def haha5():
 #
@@ -301,6 +331,34 @@ def get_post_javascript_data1():
 
     jb = ConnectionToNeo4j.register(un,pw,email)
 
+<<<<<<< HEAD
+=======
+@app.route('/cvdata', methods = ['POST'])
+def get_post_cv_javascript_data():
+    print("hello ")
+
+    fname = str(request.form['flname'])
+    usage = str(request.form['uage'])
+    usschool = str(request.form['uschool'])
+    usuni = str(request.form['uuni'])
+    usdob = str(request.form['udob'])
+    usemail = str(request.form['uemail'])
+    ustpno = str(request.form['utpno'])
+    usweak = str(request.form['uweak'])
+    usstrengh = str(request.form['ustrength'])
+    usidlcmp = str(request.form['uidcomp'])
+    usftech = str(request.form['ufmtech'])
+    usproone = str(request.form['uproone'])
+    ustech1 = str(request.form['utech1'])
+    usprotwo = str(request.form['uprotwo'])
+    ustech2 = str(request.form['utech2'])
+
+
+    uid = vari.userId
+    fresult = ConnectionToNeo4j.createNewCv(uid,fname,usage,usschool,usuni,usdob,usemail,ustpno,usweak,usstrengh,usidlcmp,usftech,usproone,ustech1,usprotwo,ustech2)
+    print(fname)
+
+>>>>>>> 7bec7cd487b975d75de0d536ce92184ea9e38163
 
 
 

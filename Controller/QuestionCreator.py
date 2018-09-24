@@ -27,30 +27,7 @@ train_text = state_union.raw("2005-GWBush.txt")
 
 question = ""
 
-# l1 = ['NNP','JJ','NNS']
-# l2 = ["NN","PRP"]
-# l3 = ["PRP$","NNS"]
-# l4 = ["PRP$","JJ","NN"]
-# l5 = ["JJ","NNS"]
-
-
-# def gen_Question():
-#     # if type(sentence) is str
-#     db = "CV"
-#     node_Count = ConnectionToNeo4j.getNodeCount(db)
-#     lang = 'en'
-#     q_list = []
-#     for id in range(1,node_Count+1):
-#         q_list.append(str(id))
-#     print(q_list)
-#
-#     # process_content()
-#     # print((word, tag)for word, tag in sentence if tag in ('NN', 'JJ'))
-#
-#
-
-
-
+#gets the keyword and creates a non technical question
 def gen_Question(keywords,qno):
     typo = "nonested"
     typo2 = "nontechnical"
@@ -109,6 +86,8 @@ def gen_Question(keywords,qno):
     grammer_corrected_question = grammer_corrected_question_list.get("result")
     print(grammer_corrected_question)
     print(vik_test_codes.question(grammer_corrected_question, qno))
+
+    #jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
     voice_record = AudioRecorder.audio_recorder(qno)
     answer_validity = SpeachToText.validation("", typo2, typo, "question" + str(qno))[0]
 
@@ -120,5 +99,3 @@ def gen_Question(keywords,qno):
 
     return question
 
-
-# gen_Question(keywords)

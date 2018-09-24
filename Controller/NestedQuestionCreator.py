@@ -3,6 +3,7 @@ import random
 
 
 # db = "python"
+#checks whether the topics are available to create a nested question if exist returns a topic
 def keywordSelector(db,filtered_words_string,param,diff_level):
     db2 ="user_difficulty"
     db3 = "difficulty"
@@ -34,6 +35,8 @@ def keywordSelector(db,filtered_words_string,param,diff_level):
     for val in filtered_words:
         lower_case_val = val.lower()
         unique_filtered_words.add(lower_case_val)
+    # added
+    # unique_filtered_words.add("tupple")
     print(unique_filtered_words)
     print("unique_filtered_words")
 
@@ -86,6 +89,9 @@ def keywordSelector(db,filtered_words_string,param,diff_level):
             print(selected_list)
             print("selected_list")
             selected_list = list(selected_list)
+
+
+
             print("selected_list")
             print(selected_list)
             print("selected_list")
@@ -110,8 +116,11 @@ def keywordSelector(db,filtered_words_string,param,diff_level):
 # keyword = keywordSelector();
 # for()
 
+#gets the technical keyword list and if no topic available access the db and gets the values
 def nonTechnicalKeywordSeelector(names,project):
-    name_list = names.split(',')
+    user_id = vari.userId
+
+    name_list = names.split(' ')
     print("name list")
     print(name_list)
     db_list = []
@@ -135,13 +144,15 @@ def nonTechnicalKeywordSeelector(names,project):
         print("error in that")
         return  db_string_list
     else:
-        db = "CV"
-        project_tech_list = ConnectionToNeo4j.cvProjectTech(db,project)
+        db = "project"
+        db2 = "project_d"
+        project_tech_list = ConnectionToNeo4j.cvProjectTech(db,db2,project,user_id)
         print("error in this")
         return project_tech_list
 
 
-
+# listings =nonTechnicalKeywordSeelector("i know everything","p1")
+# print(listings)
 
 
 

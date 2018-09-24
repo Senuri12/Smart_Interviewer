@@ -166,6 +166,7 @@ def getTechNodeCount(db):
   query = "MATCH(a:language{Name:'"+db+"'}) - [r: has]->(b:sub{})RETURN count(*)"
   gen_count = graph.run(query).evaluate()
   # print(gen_count)
+  print("inside the function")
   return gen_count
 
 
@@ -202,16 +203,22 @@ def getMatchingTopicsNonTech(db):
     return availability
 
 
-def cvProjectTech(db,pid):
-  query = "MATCH (j:"+db+"{pid:'"+ pid+"'}) RETURN j.technologies"
+def cvProjectTech(db,db2,pid,userId):
+  # query = "MATCH (j:"+db+"{pid:'"+ pid+"'}) RETURN j.technologies"
+  query = "MATCH (j:" + db + "{pid:'" + pid + "'}) - [r: projects_details]->(b:" + db2 + "{uid:'" + userId + "'}) RETURN b.technologies"
   gen_Question = graph.run(query).evaluate()
+  print(gen_Question)
   return gen_Question
+# cvProjectTech("project","project_d","p1","uid001")
 
 #returns the difficulty level list
 def getdiffLevelList(userId,db,db2,techno,level):
     query = "MATCH (j:" + db + "{uid:'" + userId + "'}) - [r: level]->(b:" + db2 + "{technology:'" + techno + "'}) RETURN b." + level+""
     gen_list = graph.run(query).evaluate()
+    print("my generated list")
+
     print(gen_list)
+    print("my generated list")
     return gen_list
 
 def getNestedDiffLevelList(userId,db,db2,db3,techno,level):
@@ -307,18 +314,12 @@ def sendQtable(languageName,qTableCreated):
     qtableValue1 = graph.run(query).evaluate()
     return qtableValue1
 
-# another method
-def edit_username(R):
-    person = graph.merge_one('language', 'qtable')
-    person['qtable'] = R
-    person.push()
-
-
 #send the node list updated existing category-asked 1 remove krarapu 1
 def sendExistingDifficultyList(userid,languageName,difficultyLevel,str_getDiffList3):
     exist = "MATCH(n: user_difficulty{uid: '" + userid + "'}) - [r: level]->(b:difficulty{technology: '" + languageName + "'}) SET b." + difficultyLevel + " ='" + str_getDiffList3 + "' return b." + difficultyLevel + ""
     qtableValue = graph.run(exist).evaluate()
     return qtableValue
+
  #get the difficulty list that wants to update - new list
 def getNewRewardList(userid,languageName,rewardState):
     exist = "MATCH(n: user_difficulty{uid: '" + userid + "'}) - [r: level]->(b:difficulty{technology: '" + languageName + "'}) return b."+rewardState+""
@@ -330,6 +331,8 @@ def getNewRewardList(userid,languageName,rewardState):
 def getDifficultyList(userid,langName,category):
     exist = "MATCH(n: user_difficulty{uid: '" + userid + "'}) - [r: level]->(b:difficulty{technology: '" + langName + "'}) return b." + category + ""
     qtableValue = graph.run(exist).evaluate()
+    print("hello anuruddha")
+    print(qtableValue)
     return qtableValue
 
 #set the new value to node
@@ -339,9 +342,49 @@ def sendNewDifficultyList(userid,languageName,rewardState,str_getDiffList4):
     return qtableValue
 
 
+#create a cv
+def createNewCv(userid,fname,usage,usschool,usuni,usdob,usemail,ustpno,usweak,usstrengh,usidlcmp,usftech,usproone,ustech1,usprotwo,ustech2):
+# def createNewCv(userid, usweak):
+    print("hi")
+    exist = "MATCH(c: CV{topic: 'yourself'}) CREATE(c) - [x: your_detail]-> (a: yourdet{uid:'" + userid + "',name:'"+fname+"',age:'"+usage+"',school:'"+usschool+"',university:'"+usuni+"', dob:'"+usdob+"',email:'"+usemail+"',telephone:'"+ustpno+"'})"
+    createdCvUserDetail = graph.run(exist).evaluate()
+    print(createdCvUserDetail)
+
+    exist2 = "MATCH(c: CV{topic: 'your weaknesses'}) SET c."+userid+" = '"+usweak+"' "
+    createdCvWeakDetail = graph.run(exist2).evaluate()
+    print(createdCvWeakDetail)
 
 
+    exist3 = "MATCH(c: CV{topic: 'your strengths'}) SET c." + userid + " = '" + usstrengh + "' "
+    createdCvStrenDetail = graph.run(exist3).evaluate()
+    print(createdCvStrenDetail)
 
+
+    exist4 = "MATCH(c: CV{topic: 'your ideal company'}) SET c." + userid + " = '" + usidlcmp + "' "
+    createdCvIdlCmpDetail = graph.run(exist4).evaluate()
+    print(createdCvIdlCmpDetail)
+
+
+    exist5 = "MATCH(c: CV{topic: 'familiar technologies'}) SET c." + userid + " = '" + usftech + "' "
+    createdCvFTechDetail = graph.run(exist5).evaluate()
+    print(createdCvFTechDetail)
+
+
+    exist6 = "MATCH(c: project{pid: 'p1'}) CREATE(c) - [x: projects_details]-> (a: yourdet{uid:'" + userid + "',topic:'"+usproone+"',technologies:'"+ustech1+"'})"
+    createdCvProOneDetail = graph.run(exist6).evaluate()
+    print(createdCvProOneDetail)
+
+
+    exist6 = "MATCH(c: project{pid: 'p2'}) CREATE(c) - [x: projects_details]-> (a: yourdet{uid:'" + userid + "',topic:'" + usprotwo + "',technologies:'" + ustech2 + "'})"
+    createdCvProOneDetail = graph.run(exist6).evaluate()
+    print(createdCvProOneDetail)
+
+
+    print(usweak)
+
+# createNewCv("uid001","Vikum Nidarshana","24","Ananda College","sliit","1994-03-28","vikum@gmail.com","07771456325")
+#
+# createNewCv("uid003","i can run")
 
 
 

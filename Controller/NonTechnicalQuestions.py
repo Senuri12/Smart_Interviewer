@@ -16,6 +16,7 @@ userid = vari.userId
 
 
 
+#gnerates non technical questions
 def generate_cv_questions():
     global grammer_corrected_pr0ject_question
     db = "CV"
@@ -35,6 +36,7 @@ def generate_cv_questions():
     global question_number
     question_number = 0
 
+#generates questions from the three sections
     while count<=3:
         session = session + 1
         print("session")
@@ -81,7 +83,7 @@ def generate_cv_questions():
             # print("hiiiiiiiiiiiiiiiiii printing count")
 
 
-
+            #gets an input to ask questions
             if random_que=="5":
                 # voice_record = AudioRecorder.audio_recorder(question_number)
                 # answer_validity = SpeachToText.validation("", typo2, typo, "question" + str(question_number))[0]
@@ -106,12 +108,6 @@ def generate_cv_questions():
                 # grammer_corrected_project_question_list = parser.parse(actual_project_question)
                 # grammer_corrected_pr0ject_question = grammer_corrected_project_question_list.get("result")
 
-
-
-
-
-
-
                 # TextToSpeechConverter.text_to_speech(grammer_corrected_pr0ject_question, lang)
                 # print(question_number)
                 # print("hiiiiiiiiiiiiiiiiii printing count")
@@ -120,11 +116,12 @@ def generate_cv_questions():
                 tech = SpeachToText.validation("", typo2,typo,"question"+str(question_number))[1]
 
                 tech = NestedQuestionCreator.keywordSelector("",tech.lstrip(),"1","")
-                # print(tech)
-                # print("tech printed")
+                tech = "i know everything"
+                print(tech)
+                print("tech printed")
                 technology_list = NestedQuestionCreator.nonTechnicalKeywordSeelector(tech,modify_random_proj_que)
-                # print("hello tech")
-                # print(technology_list)
+                print("hello tech")
+                print(technology_list)
                 # print("check validity")
                 # answer_validity = input()
 
@@ -139,18 +136,12 @@ def generate_cv_questions():
             #     answer_validity = SpeachToText.validation("", typo2,typo,"question"+str(question_number))[0]
 
 
-
-
         q_list = []
         count = count+1
 
 
 
-#
-# node_Count = ConnectionToNeo4j.getNodeCount(db)
-#
-# process_content()
-# print((word, tag)for word, tag in sentence if tag in ('NN', 'JJ'))
+
 
 
 

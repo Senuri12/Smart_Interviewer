@@ -1,5 +1,5 @@
-# from Controller import MainQuestionGenerator,AudioRecorder
-# MainQuestionGenerator.startsession()
+from Controller import MainQuestionGenerator,AudioRecorder
+MainQuestionGenerator.startsession()
 # print(AudioRecorder.audio_recorder('1'))
 
 
@@ -11,7 +11,11 @@
 
 
 
+<<<<<<< HEAD
 
+=======
+#
+>>>>>>> 7bec7cd487b975d75de0d536ce92184ea9e38163
 # from Controller import SpeachToText
 #
 #
@@ -22,6 +26,7 @@
 # value = []
 # value = SpeachToText.validation("pickling", "technical","nonested","question2")
 # print(value[0])
+<<<<<<< HEAD
 
 # def go():
 
@@ -41,6 +46,10 @@
 # for x in range(0, 20):
 #     print("We're on time %d" % (x))
 
+=======
+#
+#
+>>>>>>> 7bec7cd487b975d75de0d536ce92184ea9e38163
 
 #
 # import os
