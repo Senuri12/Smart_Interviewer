@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        <title>Smart interviewer</title>
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
+        <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/css/animate.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/vendor/swiper/swiper.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/css/global/global.css" rel="stylesheet" type="text/css"/>
+        <link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="../static/img/apple-touch-icon.png">
+        <script type="text/javascript" src="../static/js/Chart.min.js"></script>
+
+        <link rel="stylesheet" href="../static/css/boots.css" >
+
+
+
+    </head>
+
+    <!-- Body -->
+    <body>
+
+        <!--header-->
+        <header id="head" class="navbar-fixed-top s-header js__header-sticky js__header-overlay">
+            <!-- navbar -->
+            <div class="s-header__navbar">
+                <div class="s-header__container">
+                    <div class="s-header__navbar-row">
+
+                    <div class="s-header__navbar-row-col">
+                            <!-- logo -->
+                            <div class="s-header__logo">
+                                <a href="/home" class="s-header__logo-link">
+                                    <img class="s-header__logo-img s-header__logo-img-default" src="../static/img/logo.png" alt="Megakit Logo">
+                                    <img class="s-header__logo-img s-header__logo-img-shrink" src="../static/img/logo-dark.png" alt="Megakit Logo">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="s-header__navbar-row-col">
+                            <!-- Trigger -->
+                            <p style="margin-top:15px;float:right;color: Black">Menu</p>
+                            <a href="javascript:void(0);" class="s-header__trigger js__trigger">
+                                <span class="s-header__trigger-icon"></span>
+                                <svg x="0rem" y="0rem" width="3.125rem" height="3.125rem" viewbox="0 0 54 54">
+                                    <circle fill="transparent" stroke="#fff" stroke-width="1" cx="27" cy="27" r="25" stroke-dasharray="157 157" stroke-dashoffset="157"></circle>
+                                </svg>
+                            </a>
+                            <!-- End Trigger -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Navbar -->
+
+            <!-- Overlay -->
+            <div id="overlay" class="s-header-bg-overlay js__bg-overlay">
+                <!-- Nav -->
+                <nav class="s-header__nav js__scrollbar">
+                    <div class="container-fluid">
+                        <!-- Menu List -->
+                        <ul class="list-unstyled s-header__nav-menu">
+                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="/home">Go to the home page</a></li>
+                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="/interview">Start interview</a></li>
+                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="/history">View results history</a></li>
+                            <li class="s-header__nav-menu-item"><a class="s-header__nav-menu-link s-header__nav-menu-link-divider" href="/">log out</a></li>
+
+                        </ul>
+                        <!-- End Menu List -->
+                    </div>
+                </nav>
+                <!-- End Nav -->
+            </div>
+            <!-- End Overlay -->
+        </header>
+        <!--========== END HEADER ==========-->
+
+        <!--========== PROMO BLOCK ==========-->
+        <div class="g-fullheight--md js__parallax-window" style="background: url(../static/img/1920x1080/resultback.jpg) 50% 0 no-repeat fixed;">
+            <div class="g-container--md g-text-center--xs g-ver-center--md g-padding-y-150--xs g-padding-y-0--md">
+                <div class="g-margin-b-60--xs">
+                    <div class="container">
+                        <p class="text-uppercase g-font-size-14--xs g-font-weight--700 g-color--white-opacity g-letter-spacing--2 g-margin-b-25--xs"><button id="starter" style="color: white;" type="button" class="btn btn-dark" onclick="work()">View</button></p>
+
+                    </div>
+
+
+                    <p class="g-font-size-18--xs g-font-size-26--md g-color--white-opacity g-margin-b-0--xs"><canvas id="canvas" width="400" height="200"></canvas></p>
+                </div>
+            </div>
+        </div>
+        <!--========== END PROMO BLOCK ==========-->
+
+        <!--========== PAGE CONTENT ==========-->
+
+
+        <script>
+
+            function work() {
+                    $.get("/chartsa" , function(data) {
+                        var myobject = $.parseJSON(data)
+                        console.log(myobject.q1)
+
+
+                            var canvas = document.getElementById('canvas');
+
+
+                            var data = {
+                            labels: ["Question 1", "Question 2", "Question 3", "Question 4", "Question 5", "Question 6", "Question 7", "Question 8", "Question 9", "Question 10", "Question 11", "Question 12", "Question 13", "Question 14", "Question 15", "Question 16", "Question 17", "Question 18", "Question 19", "Question 20"],
+                            datasets: [
+                                {
+                                    label: "Interview session",
+                                    backgroundColor: "rgba(30,144,255)",
+                                    borderColor: "rgba(30,144,255)",
+                                    borderWidth: 2,
+                                    hoverBackgroundColor: "rgba(0,0,255)",
+                                    hoverBorderColor: "rgba(0,0,255)",
+                                    data: [myobject.q1,myobject.q2,myobject.q3,myobject.q4,myobject.q5,myobject.q6,myobject.q7,myobject.q8,myobject.q9,myobject.q10,myobject.q11,myobject.q12,myobject.q13,myobject.q14,myobject.q15,myobject.q16,myobject.q17,myobject.q18,myobject.q19,myobject.q20],}]};
+                            var option = {
+                            animation: {
+                                            duration:5000}};
+
+
+
+
+                            if(window.bar != undefined)
+                                window.bar.destroy();
+                            window.bar = Chart.Bar(canvas,{
+                                data:data,
+                                options:option});
+
+
+                            {#var myBarChart = #}
+
+
+            });}
+
+
+        </script>
+
+
+        <!--========== END PAGE CONTENT ==========-->
+
+
+
+        <!-- Back To Top -->
+        <a href="javascript:void(0);" class="s-back-to-top js__back-to-top"></a>
+
+        <script type="text/javascript" src="../static/vendor/jquery.min.js"></script>
+        <script type="text/javascript" src="../static/vendor/jquery.migrate.min.js"></script>
+        <script type="text/javascript" src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../static/vendor/jquery.smooth-scroll.min.js"></script>
+        <script type="text/javascript" src="../static/vendor/jquery.back-to-top.min.js"></script>
+        <script type="text/javascript" src="../static/vendor/scrollbar/jquery.scrollbar.min.js"></script>
+        <script type="text/javascript" src="../static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <script type="text/javascript" src="../static/vendor/jquery.parallax.min.js"></script>
+        <script type="text/javascript" src="../static/vendor/swiper/swiper.jquery.min.js"></script>
+        <script type="text/javascript" src="../static/vendor/jquery.wow.min.js"></script>
+        <script type="text/javascript" src="../static/js/global.min.js"></script>
+        <script type="text/javascript" src="../static/js/components/header-sticky.min.js"></script>
+        <script type="text/javascript" src="../static/js/components/scrollbar.min.js"></script>
+        <script type="text/javascript" src="../static/js/components/magnific-popup.min.js"></script>
+        <script type="text/javascript" src="../static/js/components/swiper.min.js"></script>
+        <script type="text/javascript" src="../static/js/components/wow.min.js"></script>
+{#        <script type="text/javascript" src="../static/js/Chart.bundle.js"></script>#}
+
+    </body>
+</html>

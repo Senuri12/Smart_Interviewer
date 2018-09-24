@@ -1,0 +1,254 @@
+<!--
+Author: Colorlib
+Author URL: https://colorlib.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Smart Interviewer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- Custom Theme files -->
+<link href="../static/css/signup.css" rel="stylesheet" type="text/css" media="all" />
+<!-- //Custom Theme files -->
+<!-- web font -->
+<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i|Montserrat:400,700" rel="stylesheet">
+        <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/css/animate.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/vendor/themify/themify.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/vendor/scrollbar/scrollbar.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/vendor/swiper/swiper.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/vendor/cubeportfolio/css/cubeportfolio.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../static/css/global/global.css" rel="stylesheet" type="text/css"/>
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+		<!-- <script type="text/javascript" src="js/bootstrap-datepicker.js"></script> -->
+		<link rel="stylesheet" href="../static/css/css_vikum.css">
+		<!-- <link rel="stylesheet" type="text/css" href="css/datepicker.css"> -->
+		<script src="../static/js/angular.min.js"></script>
+		<script src="../static/js/angular-route.js"></script>
+		<script src="../static/js/angular-cookies.min.js"></script>
+    <script src="../static/js/login.js"></script>
+		<link rel="shortcut icon" href="../static/img/favicon.ico" type="image/x-icon">
+        <link rel="apple-touch-icon" href="../static/img/apple-touch-icon.png">
+ 		<link href="../static/css/alert.css" rel="stylesheet" type="text/css"/>
+
+
+
+<!-- //web font -->
+</head>
+<body>
+	<!-- main -->
+	<div class="main-w3layouts wrapper">
+		<h1>Register</h1>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<form >
+					<input class="text" type="text" name="Username" placeholder="Username" required="" id="un">
+					<input class="text email" type="email" name="email" placeholder="Email" required="" id="email">
+					<input class="text" type="password" name="password" placeholder="Password" required="" id="pw">
+					<input class="text w3lpass" type="password" name="password" placeholder="Confirm Password" required="" id="cpw">
+					<div class="wthree-text">
+						<label class="anim">
+							<input type="checkbox" class="checkbox" required="">
+							<span>I Agree To The Terms & Conditions</span>
+						</label>
+						<div class="clear"> </div>
+					</div>
+
+				</form>
+<input type="submit" value="SIGNUP" onclick="registera()">
+				<p>You have an Account? <a href="/"> Login Now!</a></p>
+			</div>
+		</div>
+		<!-- copyright -->
+
+		<!-- //copyright -->
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+
+
+
+
+    <script>
+        function registera() {
+            var a = formValidation();
+            console.log(a);
+            if(a){
+                var uname = document.getElementById("un").value;
+                var uemail = document.getElementById("email").value;
+                var passid = document.getElementById("pw").value;
+
+                console.log(uname);
+
+                $.post("/registerdata", {
+                    username: uname,
+                    email: uemail,
+                    password: passid});
+                if (confirm("successfully registered login now?")) {
+        window.location.href = '/';
+    } else {
+        window.location.href = '/signup';
+    }
+
+
+                {#$.get( "/register/<uname>/<uemail>/<passid>" );#}
+
+
+
+            }
+            else {
+
+            }
+
+        }
+        function formValidation()
+        {
+
+
+            var uname = document.getElementById("un").value;
+            var uemail = document.getElementById("email").value;
+            var passid = document.getElementById("pw").value;
+            var conpw = document.getElementById("cpw").value;
+
+
+            if(allLetter(uname))
+            {
+                if(passid_validation(passid,7,12)&& comparepw(passid,conpw))
+                {
+                        if(ValidateEmail(uemail))
+                        {
+                            return true;
+                        }
+                        else {
+                return false;
+            }
+                }
+                else {
+                return false;
+            }
+            }
+            else {
+                return false;
+            }
+
+        }
+        function passid_validation(passid,mx,my)
+        {
+        var passid_len = passid.length;
+        if (passid_len == 0 ||passid_len >= my || passid_len < mx)
+        {
+        alert("Password should not be empty / length be between "+mx+" to "+my);
+
+        return false;
+        }
+        return true;
+        }
+
+
+        function comparepw(passid,conpw)
+        {
+            if(passid==conpw){
+                return true;
+            }
+            else {
+                alert("Entered passwords are not equal");
+                return false
+            }
+        }
+
+        function ValidateEmail(uemail)
+        {
+        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if(uemail.match(mailformat))
+        {
+        return true;
+        }
+        else
+        {
+        alert("You have entered an invalid email address!");
+
+        return false;
+        }
+        }
+
+        function allLetter(uname)
+        {
+        var letters = /^[A-Za-z]+$/;
+        if(uname.match(letters))
+        {
+        return true;
+        }
+        else
+        {
+        alert('Username must have alphabet characters only');
+        {#uname.focus();#}
+        return false;
+        }
+        }
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="../static/vendor/jquery.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/jquery.migrate.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/jquery.smooth-scroll.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/jquery.back-to-top.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/scrollbar/jquery.scrollbar.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/swiper/swiper.jquery.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/waypoint.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/counterup.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/jquery.parallax.min.js"></script>
+	        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsXUGTFS09pLVdsYEE9YrO2y4IAncAO2U"></script>
+	        <script type="text/javascript" src="../static/vendor/jquery.wow.min.js"></script>
+	        <script type="text/javascript" src="../static/js/global.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/scrollbar.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/magnific-popup.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/swiper.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/counter.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/portfolio-3-col.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/parallax.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/wow.min.js"></script>
+</body>
+</html>

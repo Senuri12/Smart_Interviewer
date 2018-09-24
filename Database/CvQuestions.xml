@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<QuestionList>
+
+    <Session name="Start">
+        <Question id="1">
+            <id>1</id>
+            <Q>What is your name?</Q>
+        </Question>
+    </Session>
+
+    <Session name="One">
+        <Question id="2">
+            <Q>How old are you?</Q>
+        </Question>
+        <Question id="3">
+            <Q>What is your School?</Q>
+        </Question>
+
+        <Question id="4">
+            <Q>What is the stream that you follow for Advanced Level?</Q>
+        </Question>
+
+        <Question id="5">
+            <Q>What is your university?</Q>
+        </Question>
+
+        <Question id="6">
+            <Q>what is your gpa?</Q>
+        </Question>
+
+    </Session>
+
+    <Session name="Two">
+        <Question id="7">
+            <Q>What are your weaknesses?</Q>
+        </Question>
+
+        <Question id="8">
+            <Q>What are your Strengths?</Q>
+        </Question>
+
+        <Question id="9">
+            <Q>Why should we hire you?</Q>
+        </Question>
+
+
+
+    </Session>
+
+    <Session name="Three">
+
+        <Question id="10">
+            <Q>what is your recent education qualification?</Q>
+        </Question>
+
+        <Question id="11">
+            <Q>what are the projects that you did?</Q>
+        </Question>
+
+        <Question id="12">
+            <Q>what are the technologies that you have used?</Q>
+        </Question>
+
+    </Session>
+
+
+</QuestionList>

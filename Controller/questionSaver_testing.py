@@ -1,0 +1,2 @@
+global gcpq
+gcpq = 'end'

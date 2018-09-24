@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Smart Interviewer</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="../static/img/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/bootstrap/css2/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="../static/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="../static/img/img-01.png" alt="IMG">
+				</div>
+
+				<form class="login100-form validate-form">
+					<span class="login100-form-title">
+						Member Login
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="text" name="email" placeholder="Email" id="email">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="pass" placeholder="Password" id="pass">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+                    <div class="text-center p-t-136">
+						<a class="txt2" id="jaja">
+
+
+						</a>
+					</div>
+
+				</form>
+                <div style="margin-top: 30px" class="container-login100-form-btn">
+						<button class="login100-form-btn" onclick="check()" data-toggle="modal" data-target="#myModal">
+							Login
+						</button>
+					</div>
+                <div class="text-center p-t-136">
+						<a class="txt2" href="/signup">
+							Create your Account
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+			</div>
+		</div>
+	</div>
+
+
+    <div class="container">
+
+		  <div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+
+			  <!-- Modal content-->
+			  <div class="modal-content">
+
+
+				<div class="modal-footer">
+				  <button id="mybooboo" type="button" class="btn btn-default" data-dismiss="modal" onclick="callz()">Enter</button>
+				</div>
+			  </div>
+
+			</div>
+		  </div>
+
+		</div>
+
+    <script>
+
+            function callz(){
+
+                if(document.getElementById("email").value ==""||document.getElementById("pass").value==""){}
+                else {$.get("/getloginresult", function(data) {
+
+                    var rico = $.parseJSON(data)
+                    console.log(rico.joking)
+                    qu = String(rico.joking)
+                    if(qu=="yes"){
+                        window.location.href = "/home";
+
+                    }
+                else {
+                        document.getElementById("jaja").innerHTML = "wrong password or email";
+                document.getElementById("jaja").style.color = "red";
+                    }});}
+
+
+
+            }
+
+            function check()
+
+        {
+
+
+            var un = String(document.getElementById("email").value );
+            var pw = String(document.getElementById("pass").value );
+            if(un==""||pw ==""){
+                document.getElementById("mybooboo").innerHTML = "Please fill fields";
+                document.getElementById("mybooboo").style.color = "red";
+            }
+            else {
+                document.getElementById("mybooboo").innerHTML = "Enter";
+                document.getElementById("mybooboo").style.color = "green";
+                console.log(document.getElementById("pass").value);
+                $.post("/logindata", {
+                    username: un,
+                    password: pw
+                });
+
+
+            }
+            }
+
+	</script>
+
+	
+<!--===============================================================================================-->	
+	<script src="../static/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/vendor/bootstrap/js2/popper.js"></script>
+	<script src="../static/vendor/bootstrap/js2/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="../static/js/main.js"></script>
+
+
+
+
+
+<script type="text/javascript" src="../static/vendor/jquery.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/jquery.migrate.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/jquery.smooth-scroll.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/jquery.back-to-top.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/scrollbar/jquery.scrollbar.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/swiper/swiper.jquery.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/waypoint.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/counterup.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+	        <script type="text/javascript" src="../static/vendor/jquery.parallax.min.js"></script>
+	        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsXUGTFS09pLVdsYEE9YrO2y4IAncAO2U"></script>
+	        <script type="text/javascript" src="../static/vendor/jquery.wow.min.js"></script>
+	        <script type="text/javascript" src="../static/js/global.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/scrollbar.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/magnific-popup.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/swiper.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/counter.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/portfolio-3-col.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/parallax.min.js"></script>
+	        <script type="text/javascript" src="../static/js/components/wow.min.js"></script>
+
+
+
+
+</body>
+</html>
